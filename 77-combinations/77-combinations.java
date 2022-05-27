@@ -1,25 +1,25 @@
 class Solution {
-    List<List<Integer>> res;
+    List<List<Integer>> res = new LinkedList();
     int n;
     int k;
     public List<List<Integer>> combine(int n, int k) {
-        res = new ArrayList<>();
         this.n = n;
         this.k = k;
-        backtrak(1, new LinkedList<>());
+        backtrack(1, new LinkedList<Integer>());
         return res;
     }
     
-    private void backtrak(int first, LinkedList<Integer> comb) {
-        if (comb.size() == k) {
-            res.add(new ArrayList<>(comb));
+    public void backtrack(int nb, LinkedList<Integer> solution) {
+        if (solution.size() == k) {
+            res.add(new LinkedList(solution));
             return;
         } else {
-            for (int i = first; i <= n; i++) {
-                comb.add(i);
-                backtrak(i+1, comb);
-                comb.removeLast();
-            }
+        
+        for (int i = nb; i<=n; i++) {
+            solution.add(i);
+            backtrack(i+1, solution);
+            solution.removeLast();
+        }
         }
     }
 }
