@@ -12,14 +12,12 @@ class Solution {
                 temp.add(mat[r++][c--]);
             }
             if (d%2==0) {
-                for (int j = temp.size()-1; j >= 0; j--) {
-                    res[i++] = temp.get(j);
-                }
-            } else {
+                Collections.reverse(temp);
+            } 
                 for (int num : temp) {
                     res[i++] = num;
                 }
-            }
+            
         }
         return res;
     }
