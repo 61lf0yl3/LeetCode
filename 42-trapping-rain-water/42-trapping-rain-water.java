@@ -1,29 +1,21 @@
 class Solution {
     public int trap(int[] height) {
         int n = height.length;
-        
-        int[] left = new int[n];
-        int currMax = height[0];
-        for (int i = 1; i < n; i++) {
-            int volume = currMax - height[i];
-            currMax = Math.max(currMax, height[i]);
-            if (volume > 0) {
-                left[i] = volume;
-            }
-        }
-        
-        int[] right = new int[n];
-        currMax = height[n-1];
-        for (int i = n-2; i >= 0; i--) {
-            int volume = currMax - height[i];
-            currMax = Math.max(currMax, height[i]);
-            if (volume > 0) {
-                right[i] = volume;
-            }
-        }
         int res = 0;
-        for (int i = 1; i < n-1; i++) {
-            res += Math.min(left[i], right[i]);
+        int left = 0;
+        int leftMax = height[left];
+        int right = n-1;
+        int rightMax = height[right];
+        while (left < right) {
+            if (height[left] < height[right]) {
+                res+= leftMax > height[left] ? leftMax-height[left] : 0;
+                leftMax = Math.max(leftMax, height[left]);
+                left++;
+            } else {
+                res+= rightMax > height[right] ? rightMax-height[right]:0;
+                rightMax = Math.max(rightMax, height[right]);
+                right--;
+            }
         }
         return res;
     }
