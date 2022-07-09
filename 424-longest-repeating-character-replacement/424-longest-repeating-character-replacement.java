@@ -15,7 +15,7 @@ class Solution {
             } else {
                 int l = s.charAt(left++)-'A';
                 chars[l]--;
-                mostFrequent = Math.max(mostFrequent, chars[l]);
+                //mostFrequent = Math.max(mostFrequent, chars[l]);
             }
             right++;
         }
