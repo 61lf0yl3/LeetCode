@@ -5,12 +5,13 @@ class Solution {
             chars[c-'a']++;
         }
         int left = 0;
-        int right = 0;
-        while (right < s2.length()) {
+        //int right = 0;
+        for (int right = 0; right < s2.length(); right++) {
             char c = s2.charAt(right);
             if (chars[c-'a']==0) {
                 chars[s2.charAt(left)-'a']++;
                 left++;
+                right--;
                 continue;
             } else {
                 chars[c-'a']--;
@@ -18,7 +19,6 @@ class Solution {
                     return true;
                 }
             }
-            right++;
         }
         return false;
     }
