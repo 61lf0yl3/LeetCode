@@ -1,31 +1,29 @@
 class Solution {
-     public int[] maxSlidingWindow(int[] nums, int k) {
+         public int[] maxSlidingWindow(int[] nums, int k) {
         int n = nums.length;
-        int[] left = new int[n];
-        int[] right = new int[n];
         
+        int[] left = new int[n];
         left[0] = nums[0];
+        int[] right = new int[n];
         right[n-1] = nums[n-1];
-        for (int i = 1; i < nums.length; i++) {
-            // from left to right
-            if (i%k==0) { // block_start
+        for (int i = 1; i < n; i++) {
+            if (i%k == 0) {
                 left[i] = nums[i];
             } else {
-                left[i] = Math.max(left[i-1], nums[i]);
+                left[i] = Math.max(nums[i], left[i-1]);
             }
             
-            // from right to left
             int j = n-i-1;
-            if (j % k == 0) { // block_start
+            if ((j+1)%k == 0) {
                 right[j] = nums[j];
             } else {
-                right[j] = Math.max(right[j+1], nums[j]);
+                right[j] = Math.max(nums[j], right[j+1]);
             }
         }
         
         int[] res = new int[n-k+1];
-        for (int i = 0; i < n-k+1; i++) {
-            res[i] = Math.max(right[i], left[i+k-1]);
+        for (int i = 0; i < res.length; i++) {
+            res[i] = Math.max(left[i+k-1], right[i]);
         }
         return res;
     }
