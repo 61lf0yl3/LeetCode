@@ -1,22 +1,23 @@
-class Solution {
+public class Solution {
     public int largestRectangleArea(int[] heights) {
-        int n = heights.length;
-        Stack<int[]> stack = new Stack<>();
-        int res = 0;
-        for (int i = 0; i < n; i++) {
-            int index = i;
-            while (!stack.isEmpty() && heights[i] < stack.peek()[1]) {                                 int[] histogram = stack.pop();
-                index = histogram[0];
-                int area = (i-histogram[0])*histogram[1];
-                res = Math.max(res, area);
+        Deque<Integer> stack = new ArrayDeque<>();
+        stack.push(-1);
+        int length = heights.length;
+        int maxArea = 0;
+        for (int i = 0; i < length; i++) {
+            while ((stack.peek() != -1)
+                    && (heights[stack.peek()] >= heights[i])) {
+                int currentHeight = heights[stack.pop()];
+                int currentWidth = i - stack.peek() - 1;
+                maxArea = Math.max(maxArea, currentHeight * currentWidth);
             }
-            stack.add(new int[]{index, heights[i]});
+            stack.push(i);
         }
-        while (!stack.isEmpty()) {
-            int[] histogram = stack.pop();
-            int area = (n-histogram[0])*histogram[1];
-            res = Math.max(res, area);
+        while (stack.peek() != -1) {
+            int currentHeight = heights[stack.pop()];
+            int currentWidth = length - stack.peek() - 1;
+            maxArea = Math.max(maxArea, currentHeight * currentWidth);
         }
-        return res;
+        return maxArea;
     }
 }
