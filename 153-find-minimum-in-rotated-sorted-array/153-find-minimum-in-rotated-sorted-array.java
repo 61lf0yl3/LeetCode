@@ -13,7 +13,7 @@ class Solution {
                 return nums[mid];
             }
             // up part
-            if (nums[0] <= nums[mid]) {
+            if (nums[low] <= nums[mid]) {
                 if (nums[mid] < nums[mid+1] && nums[high] < nums[mid]) {
                     low = mid+1;
                 } else {
