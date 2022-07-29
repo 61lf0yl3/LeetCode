@@ -1,24 +1,38 @@
 class TimeMap {
 
-    private Map<String, TreeMap<Integer, String>> map;
+    HashMap<String, ArrayList> m;
     public TimeMap() {
-        map = new HashMap<>();
+        m = new HashMap<>();
     }
     
     public void set(String key, String value, int timestamp) {
-        if (!map.containsKey(key)) {
-            map.put(key, new TreeMap<>());
+        if (!m.containsKey(key)) {
+            m.put(key, new ArrayList<>());
         }
-        map.get(key).put(timestamp, value);
+        m.get(key).add(new Pair<>(value, timestamp));
     }
     
     public String get(String key, int timestamp) {
-        if (map.containsKey(key)) {
-            Integer floorKey = map.get(key).floorKey(timestamp);
-            if (floorKey != null) {
-                return map.get(key).get(floorKey);
+        if (m.containsKey(key)) {
+            ArrayList<Pair<String, Integer>> list = m.get(key);
+            int low = 0;
+            int high = list.size()-1;
+            if (list.get(low).getValue() > timestamp) {
+                return "";
             }
-        }
+            if (list.get(high).getValue() <= timestamp) {
+                return list.get(high).getKey();
+            }
+            while (low < high) {
+                int mid = low + (high-low)/2;
+                if (list.get(low).getValue() < list.get(mid).getValue()) {
+                    low = mid+1;
+                } else {
+                    high = mid-1;
+                }
+            }
+            return list.get(low).getKey();
+        } 
         return "";
     }
 }
