@@ -6,11 +6,12 @@ public:
         int res = 0;
         vector<int> chars(128);
         while (high < s.size()) {
-            while (chars[s[high]] > 0) {
+            if (chars[s[high]] > 0) {
                 chars[s[low++]]--;
+            } else {
+                chars[s[high]]++;
+                res = max(res, high++-low+1); 
             }
-            chars[s[high]]++;
-            res = max(res, high++-low+1);
         }
         return res;
     }
