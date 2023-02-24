@@ -43,23 +43,5 @@ class Solution {
         
         return visited.get(node);
         
-        
-        
-        
-//         Map<Node, Node> m = new HashMap<>();        
-//         Node p = node;
-//         while (p != null) {
-//             m.put(p, new Node(p.val, new ArrayList()));
-//             p = p.next;
-//         }
-//         p = node;
-//         while (p != null) {
-//             Node cuurNode = m.get(p); 
-//             for (Node temp : p.neighbors) {
-//                 cuurNode.neighbors.add(m.get(temp));
-//             }
-//         }
-//         return m.get(node);
-        
      }
 }
