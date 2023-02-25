@@ -26,15 +26,22 @@ public:
         if (node == NULL) {
             return NULL;
         }
-        if (m.find(node) != m.end()) {
-            return m[node];
-        }
+        queue<Node*> q;
+        q.push(node);
         m[node] = new Node(node->val);
         
-        for (int i = 0; i < node->neighbors.size(); i++) {
-            Node* neighbor = node->neighbors[i];
-            cloneGraph(neighbor);
-            m[node]->neighbors.push_back(m[neighbor]);
+        while (!q.empty()) {
+            Node* currNode = q.front();
+            q.pop();
+            
+            for (int i = 0; i < currNode->neighbors.size(); i++) {
+                Node* neighbor = currNode->neighbors[i];
+                if (m.find(neighbor) == m.end()) {
+                    q.push(neighbor);
+                    m[neighbor] = new Node(neighbor->val);
+                }
+                m[currNode]->neighbors.push_back(m[neighbor]);
+            }
         }
         return m[node];
     }
