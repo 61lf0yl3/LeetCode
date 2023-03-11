@@ -1,20 +1,13 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        this->nums = nums;
-        return dfs(nums.size()-1);
-    }
-    
-private: 
-    vector<int> nums;
-    unordered_map<int, int> memo;
-    int dfs(int i) {
-        if (i < 0) {
-            return 0;
+        int n = nums.size();
+        unordered_map<int, int> memo;
+        memo[n-1] = nums[n-1];
+        for (int i = n-2; i >= 0; i--) {
+            memo[i] = max(memo[i+2]+nums[i], memo[i+1]);
         }
-        if (memo.find(i) == memo.end()) {
-            memo[i] = max(dfs(i-2)+nums[i], dfs(i-1));
-        }
-        return memo[i];
-    }    
+        
+        return memo[0];
+    }  
 };
