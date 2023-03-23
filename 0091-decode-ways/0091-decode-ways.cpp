@@ -1,34 +1,21 @@
 class Solution {
 public:
     int numDecodings(string s) {
-        this->s = s;
-        return dfs(0);
+        int n = s.size();
+        vector<int> dp(n+1);
+        dp[0] = 1;
+        dp[1] = s[0] == '0' ? 0 : 1;
+        
+        for (int i = 2; i < dp.size(); i++) {
+            if (s[i-1] != '0') {
+                dp[i] += dp[i-1];
+            }
+            int twodigit = stoi(s.substr(i-2, 2));
+            if (10 <= twodigit && twodigit <= 26) {
+                dp[i] += dp[i-2];
+            }
+        }
+        
+        return dp[n];
     }
-    
-private:
-    string s;
-    unordered_map<int, int> memo;
-    
-    int dfs(int i) {
-        if (i >= s.size()) {
-            return 1;
-        }
-        // if contains
-        if (memo.find(i) != memo.end()) {
-            return memo[i];
-        }
-        if (s[i] == '0') {
-            return 0;
-        }
-        if (i == s.size()-1) {
-            return 1;
-        }
-        int res = dfs(i+1);
-        if (stoi(s.substr(i, 2)) <= 26) {
-            res += dfs(i+2);
-        }
-        memo[i] = res;
-        return res;
-    }
-
 };
