@@ -1,30 +1,20 @@
 class Solution {
-    String s;
-    Map<Integer, Integer> memo;
     public int numDecodings(String s) {
-        this.s = s;
-        this.memo = new HashMap<>();
-        return dfs(0);
-    }
-    
-    private int dfs(int i) {
-        if (i >= s.length()) {
-            return 1;
+        int n = s.length();
+        int[] dp = new int[n+1];
+        dp[0] = 1;
+        dp[1] = s.charAt(0) == '0' ? 0 : 1;
+        
+        for (int i = 2; i < dp.length; i++) {
+            if (s.charAt(i-1) != '0') {
+                dp[i] += dp[i-1];
+            }
+            int twodigit = Integer.parseInt(s.substring(i-2, i));
+            if (10 <= twodigit && twodigit <= 26) {
+                dp[i] += dp[i-2];
+            }
         }
-        if (memo.containsKey(i)) {
-            return memo.get(i);
-        }
-        if (s.charAt(i) == '0') {
-            return 0;
-        }
-        if (i == s.length()-1) {
-            return 1;
-        }
-        int res = dfs(i+1);
-        if (Integer.parseInt(s.substring(i, i+2)) <= 26) {
-            res += dfs(i+2);
-        }
-        memo.put(i, res);
-        return res;
+        
+        return dp[n];
     }
 }
