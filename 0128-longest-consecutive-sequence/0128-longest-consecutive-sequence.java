@@ -5,7 +5,7 @@ class Solution {
             set.add(num);
         }
         int res = 0;
-        for (int num : set) {
+        for (int num : nums) {
             if (!set.contains(num-1)) {
                 int currentNum = num;
                 int currentStreak = 1;
