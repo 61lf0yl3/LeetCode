@@ -7,7 +7,7 @@ class Solution {
         int res = 0;
         for (int num : nums) {
             if (!set.contains(num-1)) {
-                int target = num;
+                int target = num+1;
                 while (set.contains(target)) {
                     target++;;
                 }
