@@ -18,21 +18,21 @@ class Solution {
             fast = fast.next.next;
         }
         
+        ListNode second = slow.next;
+        slow.next = null;
         // reverse mid
         ListNode reversed = null;
-        ListNode curr = slow;
-        while (curr != null) {
-            ListNode temp = curr.next;
-            
-            curr.next = reversed;
-            reversed = curr;
-            curr = temp;
+        while (second != null) {
+            ListNode temp = new ListNode(second.val);
+            temp.next = reversed;
+            reversed = temp;
+            second = second.next;
         }
         
         // combine
         ListNode first = head;
-        ListNode second = reversed;
-        while (second.next != null) {
+        second = reversed;
+        while (second != null) {
             ListNode tmp = first.next;
             first.next = second;
             first = tmp;
