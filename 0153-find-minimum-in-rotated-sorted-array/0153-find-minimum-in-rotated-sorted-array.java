@@ -16,7 +16,7 @@ class Solution {
             }
             
             // is mid on right sorted subarray
-            if (nums[mid] >= nums[0]) {
+            if (nums[mid] >= nums[left]) {
                 left = mid+1;
             } else {
                 right = mid-1;
