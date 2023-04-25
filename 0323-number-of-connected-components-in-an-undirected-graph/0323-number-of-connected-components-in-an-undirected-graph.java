@@ -32,14 +32,14 @@ class Solution {
         if (!map.containsKey(i)) {
             return;
         }
-        if (seen[i]) {
-            return;
-        }
-        seen[i] = true;
+        // if (seen[i]) {
+        //     return;
+        // }
+        // seen[i] = true;
         List<Integer> edges = map.get(i);
         for (int edge : edges) {
             backtrack(map, edge, checked, seen);
         }
-        seen[i] = false;
+        // seen[i] = false;
     }
 }
