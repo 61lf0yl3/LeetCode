@@ -17,14 +17,14 @@ class Solution {
         for (int i = 0; i < n; i++) {
             if (!checked[i]) {
                 res++;
-                backtrack(map, i, checked, new boolean[n]);
+                backtrack(map, i, checked);
             }
             checked[i] = true;
         }
         return res;
     }
     
-    private void backtrack(Map<Integer, List<Integer>> map, int i, boolean[] checked, boolean[] seen) {
+    private void backtrack(Map<Integer, List<Integer>> map, int i, boolean[] checked) {
         if (checked[i]) {
             return;
         }
@@ -32,14 +32,9 @@ class Solution {
         if (!map.containsKey(i)) {
             return;
         }
-        // if (seen[i]) {
-        //     return;
-        // }
-        // seen[i] = true;
         List<Integer> edges = map.get(i);
         for (int edge : edges) {
-            backtrack(map, edge, checked, seen);
+            backtrack(map, edge, checked);
         }
-        // seen[i] = false;
     }
 }
