@@ -31,20 +31,4 @@ class Solution {
         
         return root;
     }
-    
-    private int binarySearch(int[] inorder, int target) {
-        int left = 0;
-        int right = inorder.length-1;
-        while (left <= right) {
-            int mid = left + (right-left)/2;
-            if (inorder[mid] < target) {
-                left++;
-            } else if (inorder[mid] > target) {
-                right--;
-            } else {
-                return mid;
-            }
-        }
-        return 0;
-    }
 }
