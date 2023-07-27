@@ -12,6 +12,7 @@ class Solution {
                 sb.append(chars[i]);
                 sb.append('.');
             }
+            System.out.println(sb.toString());
             if (!map.containsKey(sb.toString())) {
                 map.put(sb.toString(), new ArrayList<>());
             }
