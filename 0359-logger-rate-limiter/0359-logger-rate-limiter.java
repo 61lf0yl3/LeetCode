@@ -5,7 +5,6 @@ class Logger {
     }
     
     public boolean shouldPrintMessage(int timestamp, String message) {
-        Map<String, Integer> log1 = log;
         if (log.containsKey(message)) {
             if (log.get(message)+10 > timestamp) {
                 return false;
