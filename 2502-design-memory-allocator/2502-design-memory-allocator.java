@@ -6,15 +6,16 @@ class Allocator {
     }
     
     public int allocate(int size, int mID) {
-        int cnt = 0; 
+        int free = 0; 
         for (int i = 0; i < memory.length; i++) {
             if (memory[i] == 0) {
-                if (++cnt == size) {
-                    for (int ii = i; ii >= i-size+1; --ii) 
-                        memory[ii] = mID; 
+                free++;
+                if (free == size) {
+                    for (int j = i; j >= i-size+1; j--) 
+                        memory[j] = mID; 
                     return i-size+1; 
                 }
-            } else cnt = 0; 
+            } else free = 0; 
         }
         return -1; 
     }
