@@ -7,7 +7,7 @@ class Allocator {
     
     public int allocate(int size, int mID) {
         int cnt = 0; 
-        for (int i = 0; i < memory.length; ++i) {
+        for (int i = 0; i < memory.length; i++) {
             if (memory[i] == 0) {
                 if (++cnt == size) {
                     for (int ii = i; ii >= i-size+1; --ii) 
@@ -20,12 +20,12 @@ class Allocator {
     }
     
     public int free(int mID) {
-        int ans = 0; 
+        int res = 0; 
         for (int i = 0; i < memory.length; ++i) 
             if (memory[i] == mID) {
-                ++ans; 
+                res++; 
                 memory[i] = 0; 
             }
-        return ans; 
+        return res; 
     }
 }
